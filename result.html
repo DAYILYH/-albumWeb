@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홍성재의 앨범</title>
+    
+    <style>
+    .title{
+        color:darkred; 
+        text-align:center;
+
+        margin-top: 100px;
+        margin-bottom: 50px;
+    }
+    .album{
+        color: black;
+    }
+    .btns{
+        margin-top: 550px; /*버튼 위치를 사진 아래로 내리기 위함*/
+        display:flex;
+        flex-direction: row; /*버튼을 행으로 나열*/
+        justify-content: center; /*버튼을 중앙에 정렬*/
+    }
+
+    .btn-back{
+        width: 150px;
+        height: 50px;
+
+        color: darkred;
+        border: 2px solid darkred;
+        background-color:white;
+
+        border-radius: 10px;
+        font-size: 20px;
+
+        cursor: pointer; /*가져가면 손가락 모양으로 바뀌는 설정*/
+    }
+    .btn-share{
+        width: 150px;
+        height: 50px;
+
+        color: white;
+        border: 2px solid darkred;
+        background-color:darkred;
+
+        border-radius: 10px;
+        font-size: 20px;
+
+        cursor: pointer;  /*가져가면 손가락 모양으로 바뀌는 설정*/
+
+        margin-left:10px;         
+    }
+    .image{
+            color:darkred;
+            text-align: center;
+            font-size:32px;
+            line-height: 48px;
+            display: none;
+        }
+
+    @media screen and (max-width: 780px) {
+        body {
+               background-position: 70px -70px;
+               background-size: 500px;
+        }
+        .image{
+            position: relative;
+
+            font: size 50px;
+            line-height: 36px;
+            padding: 10px;
+        }
+        .image > br{
+            display: none;
+        }
+    }
+
+    #image1{
+        width: 500px;
+        height: 500px;
+
+        border-radius: 10px;
+
+        position: absolute;
+        bottom: 330px; /*이미지 높게 올리기 위함*/
+        transform: translate(-50%);
+        left: 51%;
+
+        /*사진을 사각형 크기에 맞게 조정*/
+        background-size: cover;
+        background-position: center;
+        background-image: url(./img1.png);
+    }
+    #image2{
+        width: 500px;
+        height: 500px;
+
+        border-radius: 10px;
+
+        position: absolute;
+        bottom: 330px; /*이미지 높게 올리기 위함*/
+        transform: translate(-50%);
+        left: 51%;
+
+        background-size: cover;
+        background-position: center;
+        background-image: url(./img2.png);
+    }
+    #image3{
+        width: 500px;
+        height: 500px;
+
+        border-radius: 10px;
+
+        position: absolute;
+        bottom: 330px; /*이미지 높게 올리기 위함*/
+        transform: translate(-50%);
+        left: 51%;
+
+        background-size: cover;
+        background-position: center;
+        background-image: url(./img3.png);
+    }
+    #image4{
+        width: 500px;
+        height: 500px;
+
+        border-radius: 10px;
+
+        position: absolute;
+        bottom: 330px; /*이미지 높게 올리기 위함*/
+        transform: translate(-50%);
+        left: 51%;
+
+        background-size: cover;
+        background-position: center;
+        background-image: url(./img4.png);
+    }
+
+    </style>
+    <script>
+        //뒤로가기 기능
+        function back(){
+            let url = window.location.href;
+            let new_url = url.split('result.html')[0] + 'index.html';
+            window.location.href= new_url;
+        }
+
+        //공유기능
+        function share(){
+            var t = document.createElement("textarea");
+            document.body.appendChild(t);
+            t.value = window.location.href;
+            t.select();
+            document.execCommand('copy');
+            document.body.removeChild(t);
+            alert('복사 완료!')
+        }
+
+        //여기가 js 코드 복사해서 변수명만 수정한 부분
+        document.addEventListener("DOMContentLoaded", function(){
+            let pictures = ['첫 번째 사진','두 번째 사진','세 번째 사진', '네 번째 사진'];
+            let year = getParameter('year') == '' ? 1 : getParameter('year');
+            let id = `image${year}`;
+            let picture = pictures[year-1];
+            document.getElementById(id).style.display = 'block';
+            //document.getElementsByClassName('album')[0].innerHTML = picture;
+            //document.getElementsByClassName('album')[0].style.backgroundImage = url('./img${year}.png');
+            document.getElementsByTagName('h1')[0].innerHTML = `${picture}`; 
+        });
+
+        function getParameter(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+    </script>
+</head>
+<body>
+    <span style="text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;">사진 자세히 보기 </span>
+    <h1 class="title"></h1>
+
+    <p class="image" id="image1" aria-label="첫번째">
+    </p>
+
+    <p class="image" id="image2" aria-label="두번째">
+    </p>
+
+    <p class="image" id="image3" aria-label="세번째">
+    </p>
+
+    <p class="image" id="image4" aria-label="네번째">
+
+    </p>
+
+    <div class="btns">
+        <button onclick="back()" class="btn-back">뒤로가기</button>
+        <button onclick="share()" class="btn-share">공유하기</button>
+    </div>
+</body>
+</html>
